@@ -22,5 +22,12 @@ def login():
             return render_template('login.html', error='Invalid username or password.')
     return render_template('login.html')
 
+@app.route('/dashboard')
+def dashboard():
+    username = session.get('username')
+    if not username:
+        return redirect(url_for('login'))
+    return render_template('dashboard.html', username=username)
+
 if __name__ == '__main__':
     app.run(debug=True)
